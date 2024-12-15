@@ -1,3 +1,0 @@
-HDF: 0.511456 seconds
-Feather: 0.077562 seconds
-Parquet: 0.156848 seconds
