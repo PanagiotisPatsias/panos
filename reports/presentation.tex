@@ -1,0 +1,171 @@
+\documentclass[10pt]{beamer}
+
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage[
+    backend=biber,
+    style=bwl-FU,
+    url=false,
+    doi=false,
+    eprint=false
+]{biblatex}
+\addbibresource{citation.bib}
+
+\title{Analysing the Effect of Longitude and Latitude on European Inflation Dynamics}
+\author{Valentin Leuthard, Panagiotis Patsias, Liam Kane, Liam Tessendorf}
+
+\begin{document}
+
+% Title Page
+\begin{frame}
+  \titlepage
+\end{frame}
+
+% Introduction
+\begin{frame}{Motivation \& Aim}
+  \begin{itemize}
+    \item Inflation can stimulate economic growth but has limitations. \footnote{\cite{TheEffectofInflationonEconomicDevelopment}}
+
+    \item Rising prices reduce purchasing power, disproportionately affecting wage earners. \footnotemark[1]
+
+    \item Understanding drivers of inflation is crucial.
+    \vspace{1em}
+    \item \textbf{We focus on whether geographic coordinates (longitude, latitude) influence inflation rates in Europe.}
+  \end{itemize}
+\end{frame}
+
+% Data
+\begin{frame}{Data}
+  \begin{itemize}
+    \item Inflation data: \emph{OECD dataset} (29 European countries, Dec. 2005 – Sep. 2024).
+    \begin{itemize}    
+        \item Removed missing time periods for consistency.
+    \end{itemize}
+    \item Geographic data: Google’s \href{https://developers.google.com/public-data/docs/canonical/countries_csv}{\emph{countries.csv}}, filtered for European countries.
+  \end{itemize}
+\end{frame}
+
+% Methodology
+\begin{frame}{Methodology}
+  \begin{itemize}
+    \item Longitude-latitude
+    \begin{itemize}
+        \item Use centroid-based longitude and latitude for each European country.
+    \end{itemize}
+    \item Model
+    \begin{itemize}
+        \item Linear regressions on inflation using longitude, latitude, and both.
+    \end{itemize}
+    \vspace{1em}
+    \item \textbf{Goal: Identify any measurable geographic influence on inflation.}
+  \end{itemize}
+\end{frame}
+
+% Results Latitude regression
+\begin{frame}{Results Latitude regression}
+  \centering
+  \begin{tabular}{cccc}
+      \hline
+      {} &  Coefficient &  Std. Error &   P-Value \\
+      \hline  
+      Intercept &     7.108 &    4.0227 &  0.0885 \\
+      latitude  &    -0.0767 &    0.0791 &  0.3413 \\
+      \hline
+      R-squared     &     0.043\\
+      F-Statistic probability &   0.341\\
+      \hline
+      \vspace{1em}
+      \end{tabular}
+      
+  
+  \begin{itemize}
+      \item The results of the latitude regression are not statistically significant
+  \end{itemize}
+
+\end{frame}
+
+% Results of Longitude Regression
+
+\begin{frame}{Results Longitude Regression}
+  \centering
+  \begin{tabular}{cccc}
+      \hline
+      {} &  Coefficient &  Std. Error &   P-Value \\
+      \hline
+      Intercept &     1.9919 &    0.7193 &  0.0100 \\
+      longitude &     0.1061 &    0.0424 &  0.0187 \\
+      \hline
+      R-squared     &     0.188\\
+      F-Statistic probability &   0.0188\\
+      \hline
+      \vspace{1em}
+      \end{tabular}
+
+  \begin{itemize}
+      \item The results of the longitude regression are statistically significant at the 5\% significance level
+      \item This indicates a positive correlation between the degree of longitude and the mean inflation rate
+      \item Simplified this means moving more to the east results in a higher inflation rate
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}{Results of combined regression}
+  \centering
+  \begin{tabular}{cccc}
+      \hline
+      {} &  Coefficient &  Std. Error &   P-Value \\
+      \hline
+      Intercept &     4.8368 &    3.8383 &  0.2188 \\
+      latitude  &    -0.0556 &    0.0737 &  0.4571 \\
+      longitude &     0.1022 &    0.0430 &  0.0253 \\
+      \hline
+      R-squared     &    0.205\\
+      F-Statistic Probability &   0.0503\\
+      \hline
+      \vspace{1em}
+      \end{tabular}
+      
+  \begin{itemize}
+      \item Similar results to the univariate regressions 
+      \item Latitude remains statistically insignificant
+      \item Longitude remains statistically significant
+  \end{itemize}
+\end{frame}
+
+% Discussion
+\begin{frame}{Discussion}
+
+  \begin{itemize}
+      \item Latitude
+      \begin{itemize}
+          \item There seems to be no north-south effect
+      \end{itemize}
+      \item Longitude
+      \begin{itemize}
+          \item Mean inflation rates seem to increase moving eastward
+      \end{itemize}
+      \item R-squared
+      \begin{itemize}
+          \item The R-squared of the combined regression is 20.5\% 
+          \item This suggests only limited explanatory power of the model
+      \end{itemize}
+      
+      \end{itemize}
+  \vspace{1em}
+
+  \begin{itemize}
+      \item Limitations
+      \begin{itemize}
+          \item Longitude data seems to be heavily influenced by Turkey, which lies is one of the most eastern countries and has a high inflation rate
+          \item The low R-squared value suggests that more factors should be included to model inflation effectively
+      \end{itemize}
+  \end{itemize}
+
+\end{frame}
+
+% References
+\begin{frame}[allowframebreaks]{References}
+\printbibliography
+\end{frame}
+
+\end{document}
